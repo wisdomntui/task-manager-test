@@ -48,4 +48,20 @@ class TaskController extends Controller
 
         return response()->json(['success' => true]);
     }
+
+    public function destroy(Task $task)
+    {
+        $task->delete();
+
+        return response()->json(['success' => true]);
+    }
+
+    public function reorder(Request $request)
+    {
+        foreach ($request->order as $item) {
+            Task::where('id', $item['id'])->update(['priority' => $item['priority']]);
+        }
+
+        return response()->json(['success' => true]);
+    }
 }
