@@ -1,3 +1,8 @@
+import "jquery-ui-dist/jquery-ui.css";
+import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
+import "bootstrap"; // Import Bootstrap JS, which depends on jQuery
+import "jquery-ui-dist/jquery-ui";
+
 $(document).ready(function () {
     // Filter Tasks by Project
     $("#projectSelect").on("change", function () {
