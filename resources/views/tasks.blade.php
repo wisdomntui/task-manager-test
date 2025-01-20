@@ -60,4 +60,6 @@
     @include('modals.edit-task-modal')
 @endsection
 
+@section('scripts')
+    <script></script>
 @endsection
