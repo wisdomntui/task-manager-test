@@ -35,4 +35,17 @@ class TaskController extends Controller
 
         return response()->json(['success' => true]);
     }
+
+
+    public function update(Request $request, Task $task)
+    {
+        $request->validate([
+            'name' => 'required',
+            'project_id' => 'required|exists:projects,id',
+        ]);
+
+        $task->update($request->only('name', 'project_id'));
+
+        return response()->json(['success' => true]);
+    }
 }

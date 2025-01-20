@@ -95,6 +95,37 @@
                     location.reload();
                 });
             });
+
+            // Edit Task
+            $('.editTaskBtn').on('click', function() {
+                const taskId = $(this).data('id');
+                const taskName = $(this).data('name');
+                const projectId = $(this).data('project');
+                $('#editTaskId').val(taskId);
+                $('#editTaskName').val(taskName);
+                $('#editTaskProject').val(projectId);
+                $('#editTaskModal').modal('show');
+            });
+
+            $('#editTaskForm').on('submit', function(e) {
+                e.preventDefault();
+                const taskId = $('#editTaskId').val();
+                const taskName = $('#editTaskName').val();
+                const projectId = $('#editTaskProject').val();
+                $.ajax({
+                    url: `/tasks/${taskId}`,
+                    method: 'PUT',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        name: taskName,
+                        project_id: projectId
+                    },
+                    success: function() {
+                        location.reload();
+                    }
+                });
+            });
+
         });
     </script>
 @endsection
