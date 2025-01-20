@@ -17,4 +17,22 @@ class TaskController extends Controller
 
         return view('tasks', compact('tasks', 'projects'));
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'project_id' => 'required|exists:projects,id',
+        ]);
+
+        $priority = Task::where('project_id', $request->project_id)->max('priority') + 1;
+
+        Task::create([
+            'name' => $request->name,
+            'priority' => $priority,
+            'project_id' => $request->project_id,
+        ]);
+
+        return response()->json(['success' => true]);
+    }
 }

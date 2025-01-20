@@ -10,7 +10,8 @@
             <select id="projectSelect" class="form-select">
                 <option value="">All Projects</option>
                 @foreach ($projects as $project)
-                    <option value="{{ $project->id }}">{{ $project->name }}</option>
+                    <option value="{{ $project->id }}" {{ request('project') == $project->id ? 'selected' : '' }}>
+                        {{ $project->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -33,7 +34,7 @@
                         </select>
                     </div>
                     <div class="col-md-2">
-                        <button type="submit" class="btn btn-primary">Add Task</button>
+                        <button type="submit" class="btn btn-primary" id="task-btn">Add Task</button>
                     </div>
                 </div>
             </form>
@@ -61,5 +62,39 @@
 @endsection
 
 @section('scripts')
-    <script></script>
+    <script>
+        $(function() {
+            // Filter Tasks by Project
+            $('#projectSelect').on('change', function() {
+                const projectId = $(this).val();
+
+                if (projectId.length > 0) {
+                    location.href = `?project=${projectId}`;
+                } else {
+                    location.href = `/`;
+                }
+            });
+
+            // Add Task
+            $('#addTaskForm').on('submit', function(e) {
+                e.preventDefault();
+                const taskName = $('#taskName').val();
+                const projectId = $('#taskProject').val();
+
+                $('#task-btn').addClass('disabled');
+                $('#task-btn').text('Processing...');
+
+
+                $.post('{{ route('tasks.store') }}', {
+                    _token: '{{ csrf_token() }}',
+                    name: taskName,
+                    project_id: projectId
+                }).done(function() {
+                    $('#task-btn').text('Add Task');
+                    $('#task-btn').addClass('disabled');
+                    location.reload();
+                });
+            });
+        });
+    </script>
 @endsection
