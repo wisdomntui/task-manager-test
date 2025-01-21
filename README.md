@@ -37,7 +37,7 @@ Ensure you have the following installed on your local machine:
 Installation Instructions
 -------------------------
 
-1.  git clone https://github.com/your-repo/task-manager.gitcd task-manager
+1.  git clone [https://github.com/your-repo/task-manager.gitcd task-manager](https://github.com/wisdomntui/task-manager-test.git)
     
 2.  run **composer install** to install the required PHP dependencies.
 
@@ -67,7 +67,7 @@ Deployment Instructions
         
     *   Node.js and npm
         
-2.  run **git clone https://github.com/your-repo/task-manager.gitcd task-manager**
+2.  run **git clone [https://github.com/your-repo/task-manager.gitcd task-manager](https://github.com/wisdomntui/task-manager-test.git)**
     
 3.  run **composer install --no-dev --optimize-autoloader** &&
 **npm install** && **npm run build**
