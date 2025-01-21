@@ -78,15 +78,3 @@ Deployment Instructions
     
 6.  run **chmod -R 775 storage bootstrap/cachechown -R www-data:www-data storage bootstrap/cache**
     
-
-Screenshots
------------
-
-You can include screenshots of the application here to give users a preview of the UI.
-
-License
--------
-
-This project is open-source and available under the MIT License.
-
-With this README, developers, and admins can easily set up and deploy the Laravel application.
