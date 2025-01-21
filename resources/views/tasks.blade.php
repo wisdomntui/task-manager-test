@@ -44,14 +44,19 @@
         <ul id="taskList" class="list-group">
             @foreach ($tasks as $task)
                 <li class="list-group-item d-flex justify-content-between align-items-center" data-id="{{ $task->id }}">
-                    <span>{{ $task->name }}</span>
-                    <span>
+                    <div class="d-flex align-items-center">
+                        <!-- Drag Icon and Priority -->
+                        <span class="me-3 text-muted" style="cursor: grab;">&#x2630;</span>
+                        <span class="me-2 fw-bold">{{ $task->priority }}</span>
+                        <span>{{ $task->name }}</span>
+                    </div>
+                    <div>
                         <button class="btn btn-sm btn-warning editTaskBtn" data-id="{{ $task->id }}"
                             data-name="{{ $task->name }}" data-project="{{ $task->project_id }}">
                             Edit
                         </button>
                         <button class="btn btn-sm btn-danger deleteTaskBtn" data-id="{{ $task->id }}">Delete</button>
-                    </span>
+                    </div>
                 </li>
             @endforeach
         </ul>

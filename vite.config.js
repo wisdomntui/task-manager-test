@@ -7,7 +7,7 @@ export default defineConfig({
             "/api": "http://127.0.0.1:8000",
         },
         cors: {
-            origin: "http://127.0.0.1:8000", // Allow requests from the Laravel local server
+            origin: "http://127.0.0.1:8000", // Allow requests from the Laravel local server (Fix for CORS)
             methods: ["GET", "POST", "PUT", "DELETE"],
             allowedHeaders: ["Content-Type"],
         },

@@ -1,6 +1,6 @@
 import "jquery-ui-dist/jquery-ui.css";
-import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
-import "bootstrap"; // Import Bootstrap JS, which depends on jQuery
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
 import "jquery-ui-dist/jquery-ui";
 
 $(document).ready(function () {
@@ -28,11 +28,22 @@ $(document).ready(function () {
             _token: $('meta[name="csrf-token"]').attr("content"),
             name: taskName,
             project_id: projectId,
-        }).done(function () {
-            $("#task-btn").text("Add Task");
-            $("#task-btn").removeClass("disabled");
-            location.reload();
-        });
+        })
+            .done(function () {
+                $("#task-btn").text("Add Task");
+                $("#task-btn").removeClass("disabled");
+                location.reload();
+            })
+            .fail((data, status) => {
+                if (data.status == 422) {
+                    alert("All fields are required.");
+                } else {
+                    alert("Error creating task, try again.");
+                }
+
+                $("#task-btn").removeClass("disabled");
+                $("#task-btn").text("Add Task");
+            });
     });
 
     // Edit Task
@@ -97,6 +108,8 @@ $(document).ready(function () {
             $.post("/tasks/reorder", {
                 _token: $('meta[name="csrf-token"]').attr("content"),
                 order: order,
+            }).done(() => {
+                location.reload();
             });
         },
     });
